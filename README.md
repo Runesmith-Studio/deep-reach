@@ -56,7 +56,7 @@ and deep-reach runs the whole research loop for you:
 | Price | $500–5,000 / mo | "free" (your hours) | **free, open source** |
 | Setup | Sales call + onboarding | Glue 5 tools yourself | **one skill, drop-in** |
 | Reads full originals | partial | manual | **✅ automatic** |
-| Chinese platforms (B站/小红书/雪球) | rarely | hard | **✅ built in** |
+| Chinese platforms (Bilibili/Xiaohongshu/Xueqiu) | rarely | hard | **✅ built in** |
 | Tells you how much to trust it | ❌ | ❌ | **✅ trust rating + blind spots** |
 | Real user quotes, cited | dashboards | copy-paste | **✅ quoted + linked** |
 | Lives where you work | separate app | many apps | **✅ inside Claude Code** |
