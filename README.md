@@ -6,7 +6,7 @@
 disciplined pipeline for **public-opinion & market research**:
 
 - **[last30days](https://github.com/mvanhorn/last30days-skill)** — the *thermometer*: finds **where** a topic is being discussed and how hot it is, across Reddit, X, YouTube, TikTok, Hacker News, GitHub and more.
-- **[agent-reach](https://github.com/Panniantong/Agent-Reach)** — the *reach*: reads the **full originals** — posts, comment bodies, video transcripts, web pages — across 13+ platforms including Chinese ones (Bilibili, XiaoHongShu, V2EX, Xueqiu).
+- **[agent-reach](https://github.com/Panniantong/Agent-Reach)** — the *reach*: reads the **full originals** — posts, comment bodies, video transcripts, web pages — across 13+ platforms including Chinese ones (Bilibili, XiaoHongShu, V2EX, Xueqiu). *Several channels are zero-account; login-walled ones (X, XiaoHongShu, Xueqiu, full Reddit) need a configured account — see `SKILL.md` §5.*
 
 Neither tool alone gives you a *finished* answer. last30days is fast but thin and
 prone to single-source concentration. agent-reach reads deeply but doesn't score
@@ -46,16 +46,20 @@ cp -r deep-reach/skills/deep-reach ~/.claude/skills/
 
 # 2. (recommended) install the two tools it orchestrates
 #    last30days — see https://github.com/mvanhorn/last30days-skill
-pipx install agent-reach   # or: pipx install <path-to-clone>   (https://github.com/Panniantong/Agent-Reach)
-pipx install bilibili-cli  # optional: login-free Bilibili search
+# agent-reach is not on PyPI — install from source:
+pipx install https://github.com/Panniantong/agent-reach/archive/main.zip
+#   (or from a local clone:  pipx install <path-to-clone>)
+agent-reach install --env=auto   # set up the free channels
+pipx install bilibili-cli        # optional: login-free Bilibili search
 
 # 3. check what works right now
 agent-reach doctor --json
 ```
 
-deep-reach **degrades gracefully**: with neither tool installed it still produces
-a structured, gap-honest brief using Claude's built-in `WebSearch` / `WebFetch`
-— just with shallower reach.
+deep-reach **degrades gracefully**: if your host exposes `WebSearch` / `WebFetch`,
+it still produces a shallower, gap-honest brief without the two tools. If the host
+exposes neither those tools nor the two skills, it stops with `not_covered` + setup
+notes rather than pretend to research.
 
 ## Use
 

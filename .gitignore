@@ -1,3 +1,18 @@
 .DS_Store
 *.log
 /tmp/
+
+# research output (may contain gathered data)
+research/
+
+# secrets / credentials — never commit
+.env
+.env.*
+.agent-reach/
+*.cookie
+*.cookie*
+*.cookies*
+*.token
+*.token*
+*.secret
+*.secret*

@@ -27,7 +27,7 @@
 
 ## not_covered (what was skipped + why)
 - X / XiaoHongShu: login required, account layer not opened this round (out of scope).
-- Full Reddit comment trees: anonymous `.json` blocked; only post bodies via backend.
+- Full Reddit comment trees: not pulled this run — anonymous access was unreliable and agent-reach's Reddit route is login-backed (out of scope here); last30days supplied the thread bodies cited above.
 - Exa semantic search: key not configured, skipped.
 
 ## Verdict

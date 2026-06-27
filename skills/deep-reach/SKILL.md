@@ -24,8 +24,9 @@ description: >
     cited brief" into one disciplined pipeline.
 
   NOT for: a quick trend glance (use last30days directly) / reading a single URL
-  (use agent-reach directly) / writing reports, slides, or translations
-  (this skill only gathers & structures evidence).
+  (use agent-reach directly) / generic report, slide, or translation production
+  unrelated to evidence gathering. (Its final artifact IS a cited brief, but it
+  does not do downstream content production.)
 ---
 
 # deep-reach — Thermometer → Deep Originals → Cited Brief
@@ -71,9 +72,10 @@ Invoke the `last30days` skill (or its CLI) to get two things:
   `source_coverage` / `warnings`.
 
 ```bash
-# Structured output (URLs + coverage) to feed Phase 2.
-# Path depends on your last30days install; --emit=json is the stable contract.
-last30days "<topic>" --emit=json > /tmp/deep-reach-l30d.json
+# Invoke the last30days skill:  /last30days <topic>
+# Or run its engine directly (there is no guaranteed global `last30days` binary):
+#   python3 <last30days-skill-dir>/scripts/last30days.py '<topic>' --emit=json > /tmp/deep-reach-l30d.json
+# (run after last30days' own preflight; --emit=json is the engine's stable flag)
 ```
 
 Note the `warnings` last30days reports itself (e.g. "evidence highly
@@ -97,7 +99,7 @@ channels for the Chinese/niche platforms your built-ins can't touch.
 |---|---|---|
 | Any web page (clean text) | `curl -s "https://r.jina.ai/<URL>"` | none |
 | Any web page (fallback) | built-in `WebFetch` | none |
-| Reddit post body | via **last30days backend** (direct `WebFetch`/jina of `.json` is blocked by Reddit as of 2026-06); full comment trees need login = out of scope | none |
+| Reddit | via the **last30days** engine (it may return Reddit threads/comments in its own pipeline — record whatever coverage/warnings it reports). **agent-reach**'s direct Reddit route is login-backed only (no zero-config path); anonymous `.json`/jina is unreliable. | none (via last30days) |
 | YouTube transcript | `yt-dlp --write-sub --write-auto-sub --skip-download -o "/tmp/%(id)s" "<URL>"` | none |
 | GitHub repos/issues/discussions | `gh search ...` / `gh issue list` / built-in `WebFetch` | none |
 | Bilibili search/detail | `bili search "<query>" --type video -n 5` | none (login-free) |
@@ -109,9 +111,10 @@ channels actually work right now; log the dead ones in `not_covered`, don't
 hammer them.
 
 > **Graceful degradation**: deep-reach works best with both last30days and
-> agent-reach installed, but each phase falls back to built-in `WebSearch` /
-> `WebFetch` if a tool is missing. With neither tool you still get a structured,
-> gap-honest brief — just shallower reach.
+> agent-reach installed; each phase falls back to the host's `WebSearch` /
+> `WebFetch` if a tool is missing. If the host exposes **neither** those tools
+> nor the two skills, stop with `not_covered` + setup notes — don't pretend to
+> research.
 
 ### Phase 3 — Synthesize into a cited brief
 
@@ -179,7 +182,8 @@ enough this round, don't treat as primary."
 - **Best with**: [`last30days`](https://github.com/mvanhorn/last30days-skill)
   (trend thermometer) + [`agent-reach`](https://github.com/Panniantong/Agent-Reach)
   (multi-platform reach, free channels via `bili` / `curl jina` / `yt-dlp` etc.).
-  Both optional — deep-reach degrades to built-in `WebSearch`/`WebFetch`.
+  Both optional — deep-reach degrades to the host's `WebSearch`/`WebFetch` when
+  available (and stops honestly when not).
 - **Does not**: process content beyond gathering & structuring (no report
   writing / slides / translation); no posting/liking/commenting (write actions).
   Reading login-walled platforms = controlled, see §5.
@@ -223,12 +227,16 @@ No → ship the brief, record the platform in `not_covered`. Yes → go to §5.3
    the user's personal/main account. If none exists, have the user create one.
 2. **Log in within an isolated environment** — a separate browser profile /
    sandbox; **never** in the user's daily browser.
-3. **Get credentials (either way, never the daily browser)**:
-   - paste that account's cookie into the tool (`agent-reach configure`), **or**
-   - run `agent-reach configure --from-browser <isolated-profile>` against that
-     isolated profile only.
-   - ⚠️ **Never** run `--from-browser` against the daily browser (it would pull
-     real-account credentials).
+3. **Get credentials — manual export only (the safe default)**:
+   - Log the throwaway account into an isolated browser profile, export its
+     cookie with a tool like Cookie-Editor, and paste it into
+     `agent-reach configure` for that platform.
+   - ⚠️ **Do not use `agent-reach configure --from-browser` as the safe path.**
+     It takes only a *browser name* (chrome/firefox/edge/…), **not** a profile
+     path — so it cannot be scoped to the throwaway profile, and run against your
+     daily browser it would pull your real-account cookies. Only consider it if a
+     future Agent Reach version adds explicit isolated-profile support **and**
+     you've confirmed that browser holds only the throwaway account.
 4. **Fetch for this task only** — read/search what's needed, distill into the
    brief, note in `source_coverage` that a `<platform>` account was used.
 5. **Clear credentials after (non-resident)** — reset that platform's cookie
