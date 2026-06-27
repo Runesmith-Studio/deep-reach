@@ -1,32 +1,29 @@
 ---
 name: deep-reach
 description: >
-  Deep evidence research pipeline — turn a shallow "last-30-days community pulse"
-  into a cited, gap-honest research brief. It chains a trend thermometer
-  (last30days) with multi-platform deep reading (agent-reach) and adds evidence
-  discipline: every brief carries source_coverage, not_covered, and a strength
-  verdict (thick / medium / thin).
+  One skill for AI social listening, market research & competitive intelligence —
+  turn any question into a cited, gap-honest research brief. Scans the last-30-day
+  pulse, reads the real originals across 13+ platforms (Reddit, X, YouTube,
+  GitHub, Bilibili, XiaoHongShu, V2EX, web), and synthesizes a brief that carries
+  source_coverage, declared blind spots (not_covered), and a trust rating
+  (thick / medium / thin) — so a thin hunch is never mistaken for a hard finding.
 
-  深度证据调研流水线 —— 把"近30天社区温度计"深挖成可引用、敢标盲区的证据简报。
+  一个技能搞定舆情监测 / 市场调研 / 竞品情报 —— 问一句,拿回一份带引用、敢标盲区、带可信度评级的调研简报。
 
   MUST USE when: public-opinion monitoring / 舆情监测, market & competitor research /
   市场竞品调研, product or niche validation / 选品验证, finding real user quotes &
   pain points / 找真实用户原话与痛点, "verify this for real" / "把这个查实",
-  "last30days is too thin, dig deeper" / "挖深一点".
+  "dig deeper than a quick trend scan" / "挖深一点".
 
-  How it relates to the two tools it orchestrates:
-  - last30days = the thermometer (finds WHERE a topic is discussed and how hot).
-    deep-reach calls it in Phase 1; it does not reimplement it.
-  - agent-reach = the raw reach tool (reads one URL / searches one platform,
-    incl. Reddit, X, YouTube, GitHub, Bilibili, XiaoHongShu, V2EX, RSS, web).
-    deep-reach calls its free channels in Phase 2.
-  - deep-reach = the orchestrator that turns "thermometer → deep originals →
-    cited brief" into one disciplined pipeline.
+  Under the hood (operational note, not the pitch): deep-reach runs a three-phase
+  pipeline and can drive two optional engines when present — a 30-day trend
+  thermometer (last30days) for Phase 1 discovery, and a multi-platform reader
+  (agent-reach) for Phase 2 deep reads. Both optional; it degrades to the host's
+  web search/fetch and always declares what it could not cover.
 
-  NOT for: a quick trend glance (use last30days directly) / reading a single URL
-  (use agent-reach directly) / generic report, slide, or translation production
-  unrelated to evidence gathering. (Its final artifact IS a cited brief, but it
-  does not do downstream content production.)
+  NOT for: reading a single URL when you just want raw fetch / generic report,
+  slide, or translation production unrelated to evidence gathering. (Its final
+  artifact IS a cited brief, but it does not do downstream content production.)
 ---
 
 # deep-reach — Thermometer → Deep Originals → Cited Brief

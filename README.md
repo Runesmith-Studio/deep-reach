@@ -1,99 +1,134 @@
-# deep-reach
+<div align="center">
 
-**Turn a 30-day community pulse into a cited, gap-honest research brief.**
+# 🛰️ deep-reach
 
-`deep-reach` is a Claude Code skill that chains two great open tools into one
-disciplined pipeline for **public-opinion & market research**:
+### Ask once. Get a cited, gap-honest research brief.
 
-- **[last30days](https://github.com/mvanhorn/last30days-skill)** — the *thermometer*: finds **where** a topic is being discussed and how hot it is, across Reddit, X, YouTube, TikTok, Hacker News, GitHub and more.
-- **[agent-reach](https://github.com/Panniantong/Agent-Reach)** — the *reach*: reads the **full originals** — posts, comment bodies, video transcripts, web pages — across 13+ platforms including Chinese ones (Bilibili, XiaoHongShu, V2EX, Xueqiu). *Several channels are zero-account; login-walled ones (X, XiaoHongShu, Xueqiu, full Reddit) need a configured account — see `SKILL.md` §5.*
+**AI social listening · market research · competitive intelligence — as one Claude Code skill.**
 
-Neither tool alone gives you a *finished* answer. last30days is fast but thin and
-prone to single-source concentration. agent-reach reads deeply but doesn't score
-30-day trends or enforce evidence hygiene. **deep-reach is the missing
-orchestration layer** that turns *thermometer → deep originals → cited brief*,
-and adds the discipline that makes the output trustworthy:
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE)
+[![Claude Code Skill](https://img.shields.io/badge/Claude%20Code-skill-da7756.svg)](https://docs.claude.com/en/docs/claude-code)
+[![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 
-> Every brief carries **source_coverage**, **not_covered** (declared blind spots),
-> and a **strength verdict** (thick / medium / thin). Thin is labelled thin — never
-> dressed up as primary evidence.
+[中文说明 →](README.zh-CN.md)
+
+</div>
 
 ---
 
-## Why it's different
+> **No more $500/month social-listening dashboards you barely open.**
+> **No more juggling a trend scanner in one tab and a scraper in another.**
+> **No more copy-pasting Reddit threads, YouTube transcripts, and forum posts into a doc by hand.**
+>
+> Just ask. **deep-reach** scans what people said in the last 30 days, reads the
+> *real* originals across 13+ platforms, and hands you a **cited brief that tells
+> you how much to trust it** — in one skill, inside Claude Code.
 
-| | last30days | agent-reach | **deep-reach** |
+---
+
+## What you get
+
+You ask a question in plain language — *"what do people really think about X?"*,
+*"competitor research on Y, in users' own words"*, *"is this niche worth it?"* —
+and deep-reach runs the whole research loop for you:
+
+```
+①  PULSE   →   ②  DIG   →   ③  BRIEF
+```
+
+1. **Pulse** — finds *where* your topic is hot right now and which way the
+   conversation is moving.
+2. **Dig** — reads the **full originals** (posts, comment threads, video
+   transcripts, articles) across **Reddit, X, YouTube, GitHub, Bilibili,
+   XiaoHongShu, V2EX, and the open web**.
+3. **Brief** — writes a **cited evidence brief** with quoted sources, declared
+   blind spots, and a **trust rating** (thick / medium / thin) so you never
+   mistake a thin hunch for a hard finding.
+
+→ See a [sample brief](examples/example-brief.md).
+
+---
+
+## Why deep-reach
+
+|  | Enterprise listening suites | DIY tool-juggling | **deep-reach** |
 |---|---|---|---|
-| 30-day trend scan & scoring | ✅ | — | ✅ (delegates) |
-| Reads full originals / comments / transcripts | partial | ✅ | ✅ (delegates) |
-| Chinese platforms (B站 / 小红书 / 雪球) | weak | ✅ | ✅ |
-| Clusters → deep-reads → one cited brief | — | — | ✅ |
-| Declares blind spots + evidence strength | — | — | ✅ |
-| Free-first; account layer guided & non-resident | n/a | manual | ✅ (see SKILL §5) |
+| Price | $500–5,000 / mo | "free" (your hours) | **free, open source** |
+| Setup | Sales call + onboarding | Glue 5 tools yourself | **one skill, drop-in** |
+| Reads full originals | partial | manual | **✅ automatic** |
+| Chinese platforms (B站/小红书/雪球) | rarely | hard | **✅ built in** |
+| Tells you how much to trust it | ❌ | ❌ | **✅ trust rating + blind spots** |
+| Real user quotes, cited | dashboards | copy-paste | **✅ quoted + linked** |
+| Lives where you work | separate app | many apps | **✅ inside Claude Code** |
 
-**Selling point in one line:** the comprehensiveness of deep multi-platform
-reach *plus* the recency of a 30-day pulse — wrapped in research discipline that
-tells you how much to trust the result.
+**The pitch in one line:** the reach of an enterprise intelligence suite and the
+freshness of a live trend scan — minus the price tag, the tab-juggling, and the
+guesswork about whether the answer is solid.
+
+---
+
+## Features
+
+- 🔭 **Social listening & buzz tracking** — last-30-day pulse on any topic, brand, or event.
+- 🧭 **Market & competitor research** — surface real complaints, praise, and demand signals in customers' own words.
+- ✅ **Product / niche validation** — gather honest demand evidence *before* you build.
+- 🗣️ **Voice-of-customer mining** — the exact phrases users use, ready to reverse into copy or keywords.
+- 🌏 **13+ platforms, English & Chinese** — Reddit, X, YouTube, GitHub, Bilibili, XiaoHongShu, V2EX, web, and more.
+- 🧪 **Evidence discipline built in** — every brief declares its coverage, its blind spots, and a trust rating. No dressed-up guesses.
+- 🔒 **Private & free-first** — zero-account by default; never touches your main accounts or your daily-browser cookies.
 
 ---
 
 ## Install
 
 ```bash
-# 1. Drop the skill into your Claude Code skills dir
+# 1. Add the skill to Claude Code
 git clone https://github.com/Runesmith-Studio/deep-reach.git
 cp -r deep-reach/skills/deep-reach ~/.claude/skills/
-
-# 2. (recommended) install the two tools it orchestrates
-#    last30days — see https://github.com/mvanhorn/last30days-skill
-# agent-reach is not on PyPI — install from source:
-pipx install https://github.com/Panniantong/agent-reach/archive/main.zip
-#   (or from a local clone:  pipx install <path-to-clone>)
-agent-reach install --env=auto   # set up the free channels
-pipx install bilibili-cli        # optional: login-free Bilibili search
-
-# 3. check what works right now
-agent-reach doctor --json
 ```
 
-deep-reach **degrades gracefully**: if your host exposes `WebSearch` / `WebFetch`,
-it still produces a shallower, gap-honest brief without the two tools. If the host
-exposes neither those tools nor the two skills, it stops with `not_covered` + setup
-notes rather than pretend to research.
+That's it — start asking. For the **deepest** multi-platform reach, deep-reach can
+also drive two optional research engines if present (it sets them up for you):
+
+```bash
+# optional power-ups (recommended for full reach)
+pipx install https://github.com/Panniantong/agent-reach/archive/main.zip
+agent-reach install --env=auto      # free multi-platform channels
+pipx install bilibili-cli           # login-free Bilibili search
+#  + the last30days skill: https://github.com/mvanhorn/last30days-skill
+```
+
+Without them, deep-reach still works wherever your Claude host exposes web
+search/fetch — just with shallower reach. It will always tell you what it
+couldn't cover rather than pretend.
+
+---
 
 ## Use
 
 Just ask Claude things like:
-- "research what people actually say about X, dig into the originals"
-- "把这个话题查实,找几条真实用户原话"
-- "competitor research on Y — real user complaints, in their words"
 
-Claude runs the three phases and writes the brief to `./research/`.
+- *"research what people actually say about \<topic\>, dig into the originals"*
+- *"competitor research on \<product\> — real user complaints, cited"*
+- *"is \<niche\> worth building? show me real demand signals"*
 
----
-
-## 中文简介
-
-`deep-reach` 是一个把**两个开源工具二合一**的 Claude Code 调研 skill,专做
-**舆情监测 + 市场调研**:
-
-- **last30days** 当温度计:找出"哪里在讨论、热不热"(Reddit/X/YouTube/HN/GitHub…)。
-- **agent-reach** 当深挖手:把原文/评论/视频字幕读全,覆盖 B站/小红书/V2EX/雪球等中文平台。
-
-两个单用都不够——温度计薄且来源易集中,深挖手不打分趋势也不管证据卫生。
-**deep-reach 是中间那层指挥**:温度计 → 深挖原文 → 一份可引用简报,并强制
-每份简报带 `source_coverage`(覆盖)、`not_covered`(敢标盲区)、厚度判定
-(厚/中/薄,薄就标薄、绝不冒充主据)。
-
-**默认零账号**;遇到登录墙挡住最肥证据时,会主动提醒、引导你用一次性专用小号、
-用完即清(永不用主账号、永不抽日常浏览器 Cookie,详见 `SKILL.md` §5)。
+deep-reach runs Pulse → Dig → Brief and writes the result to `./research/`.
 
 ---
 
-## Credits & License
+## Contributing
 
-Built on and grateful to **[last30days](https://github.com/mvanhorn/last30days-skill)**
-(Matt Van Horn) and **[agent-reach](https://github.com/Panniantong/Agent-Reach)**.
-deep-reach is an orchestration layer; the heavy lifting is theirs.
+Issues and PRs welcome. If deep-reach saved you a research scramble, a ⭐ helps
+others find it.
 
-MIT © Runesmith Studio. Issues & PRs welcome.
+## Powered by
+
+deep-reach is an orchestration skill. Full credit to the open tools it can build on:
+[last30days](https://github.com/mvanhorn/last30days-skill) and
+[agent-reach](https://github.com/Panniantong/Agent-Reach).
+
+## License
+
+MIT © [Runesmith Studio](https://github.com/Runesmith-Studio) — an independent AI app studio.
+
+<sub>Keywords: AI market research · social listening · competitive intelligence · competitor analysis · consumer insights · voice of customer · OSINT · Reddit / X / YouTube / Bilibili / Xiaohongshu research · Claude Code skill · agent skill</sub>
