@@ -96,11 +96,16 @@ pipx install https://github.com/Panniantong/agent-reach/archive/main.zip
 agent-reach install --env=auto      # free multi-platform channels
 pipx install bilibili-cli           # login-free Bilibili search
 #  + the last30days skill: https://github.com/mvanhorn/last30days-skill
+# optional Hermes Agent X/Twitter route:
+#   hermes plugins install Xquik-dev/hermes-tweet --enable
+#   export XQUIK_API_KEY="your-xquik-api-key"
 ```
 
 Without them, deep-reach still works wherever your Claude host exposes web
 search/fetch — just with shallower reach. It will always tell you what it
 couldn't cover rather than pretend.
+
+When running in Hermes Agent, [Hermes Tweet](https://github.com/Xquik-dev/hermes-tweet) can supply an optional read-only X/Twitter route for Phase 2. Keep `HERMES_TWEET_ENABLE_ACTIONS` unset; deep-reach needs source collection, not X/Twitter write actions.
 
 ---
 
