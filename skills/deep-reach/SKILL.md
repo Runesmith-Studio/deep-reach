@@ -102,6 +102,7 @@ channels for the Chinese/niche platforms your built-ins can't touch.
 | Bilibili search/detail | `bili search "<query>" --type video -n 5` | none (login-free) |
 | V2EX hot/topics | `curl -s "https://www.v2ex.com/api/topics/hot.json" -H "User-Agent: deep-reach/1.0"` | none (may need proxy) |
 | Web semantic search (optional) | `mcporter call 'exa.web_search_exa(query: "...", numResults: 5)'` | free Exa key (off by default; if missing, skip and log in not_covered) |
+| X/Twitter via Hermes Agent (optional) | Hermes Tweet read tools after `hermes plugins install Xquik-dev/hermes-tweet --enable` and `XQUIK_API_KEY` setup | API key; keep `HERMES_TWEET_ENABLE_ACTIONS` unset |
 
 **Discipline**: before digging, run `agent-reach doctor --json` once to see which
 channels actually work right now; log the dead ones in `not_covered`, don't
@@ -184,6 +185,10 @@ enough this round, don't treat as primary."
 - **Does not**: process content beyond gathering & structuring (no report
   writing / slides / translation); no posting/liking/commenting (write actions).
   Reading login-walled platforms = controlled, see §5.
+- **Hermes Agent X/Twitter route**: if Hermes Tweet is installed, use its read
+  tools only to collect public X/Twitter originals and available engagement
+  signals. Leave `HERMES_TWEET_ENABLE_ACTIONS` unset; record the route in
+  `source_coverage` and fall back honestly when unavailable.
 - **Uninstall the tool layer**: `pipx uninstall agent-reach bilibili-cli`.
 
 ---
