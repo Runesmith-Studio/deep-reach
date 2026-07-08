@@ -75,7 +75,7 @@ guesswork about whether the answer is solid.
 - 🗣️ **Voice-of-customer mining** — the exact phrases users use, ready to reverse into copy or keywords.
 - 🌏 **13+ platforms, English & Chinese** — Reddit, X, YouTube, GitHub, Bilibili, XiaoHongShu, V2EX, web, and more.
 - 🧪 **Evidence discipline built in** — every brief declares its coverage, its blind spots, and a trust rating. No dressed-up guesses.
-- 🔒 **Private & free-first** — zero-account by default; never touches your main accounts or your daily-browser cookies.
+- 🔒 **Private & public-source only** — zero-account, no logins; never touches any account or daily-browser cookies. Login-walled content is reported as a blind spot, not scraped.
 
 ---
 

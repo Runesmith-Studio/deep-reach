@@ -26,12 +26,12 @@
 | Local-first is a real wedge | support | active OSS projects + users self-selecting for offline | gh search repos | observed |
 
 ## not_covered (what was skipped + why)
-- X / XiaoHongShu: login required, account layer not opened this round (out of scope).
+- X / XiaoHongShu: login required — out of scope (recorded, not scraped).
 - Full Reddit comment trees: not pulled this run — anonymous access was unreliable and agent-reach's Reddit route is login-backed (out of scope here); last30days supplied the thread bodies cited above.
 - Exa semantic search: key not configured, skipped.
 
 ## Verdict
 - **Can conclude**: in this space, trust (sync + export) beats feature count;
   position on reliability and data ownership, not on "more AI".
-- **Still missing**: paid-user willingness specifics — would need a login-walled
-  platform pass (see SKILL §5) or a survey to firm up pricing.
+- **Still missing**: paid-user willingness specifics — would need a first-party
+  survey or sales data to firm up pricing (login-walled sources are out of scope).

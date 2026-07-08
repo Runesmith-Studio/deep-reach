@@ -31,27 +31,21 @@ description: >
 > One line: last30days is the radar that spots blips; deep-reach flies to each
 > blip, reads the original, and writes it up as citable evidence.
 >
-> **Free, zero-account channels by default.** An account layer exists but is
-> *not* always-on — when a paywall/login blocks the richest evidence, deep-reach
-> *prompts you*, then *guides* a safe, throwaway setup (see §5). Never your main
-> account, never your daily browser's cookies.
+> **Free, zero-account, public channels only.** deep-reach reads what's openly
+> reachable — no logins, no accounts, no cookies. Anything behind a login wall is
+> out of scope and recorded in `not_covered` rather than worked around.
 
 ---
 
 ## 0. Red lines (always enforced)
 
-1. **Zero-account by default.** Without the §5 prompt-and-approve flow, use only
-   the free-channel table below. By default **never** run
-   `agent-reach configure --from-browser`, **never** run
-   `agent-reach install --channels=...` (it triggers cookie import).
-2. **Account layer = on-demand + guided + per-use approval + non-resident**
-   (not forbidden, just controlled). Login-walled platforms (X/Twitter,
-   XiaoHongShu, Xueqiu, LinkedIn, full Reddit comment trees) are off by default.
-   When the richest evidence sits behind a login, follow §5: prompt the user
-   ("what extra depth this unlocks + the cost") → approval → guide a dedicated
-   throwaway account → clear credentials after. **Never** auto-enable, **never**
-   use the user's main account, **never** pull cookies from the daily browser,
-   **never** commit cookies to a repo.
+1. **Zero-account, public channels only.** Use only the free, no-login channels
+   in the table below. **Never** run `agent-reach configure --from-browser` or
+   `agent-reach install --channels=...` (both import cookies).
+2. **Login-walled platforms are out of scope.** X/Twitter, XiaoHongShu, Xueqiu,
+   LinkedIn, and full Reddit comment trees sit behind logins — deep-reach does
+   **not** work around them. Record them in `not_covered`; never scrape behind a
+   login or touch a main account's cookies.
 3. **Declare your blind spots.** Every brief carries `not_covered` (what was not
    checked + why). Out of reach ≠ pretend covered.
 4. **Thin is thin.** Evidence concentrated in a single source / total < 5 items →
@@ -149,9 +143,8 @@ Write the brief with the template below. Default output:
 - [ ] At least **2 of them non-Reddit** (proof you actually filled the gap, not
       just landed on one source again).
 - [ ] The brief explicitly lists `not_covered`.
-- [ ] **Zero-account by default**; if the account layer was used, the §5 flow was
-      followed (approval + dedicated throwaway account + credentials cleared
-      after), and `source_coverage` names which platform account was used.
+- [ ] **Zero-account only** — every source is a public, no-login channel; anything
+      login-walled is recorded in `not_covered`, not worked around.
 - [ ] Evidence is **distilled into the brief** (feeds a decision), not dumped raw.
 
 Below 5 items / 2 non-Reddit → mark `strength: thin` and say plainly "didn't dig
@@ -182,71 +175,9 @@ enough this round, don't treat as primary."
   Both optional — deep-reach degrades to the host's `WebSearch`/`WebFetch` when
   available (and stops honestly when not).
 - **Does not**: process content beyond gathering & structuring (no report
-  writing / slides / translation); no posting/liking/commenting (write actions).
-  Reading login-walled platforms = controlled, see §5.
+  writing / slides / translation); no posting/liking/commenting (write actions);
+  no reading behind login walls (out of scope → `not_covered`).
 - **Uninstall the tool layer**: `pipx uninstall agent-reach bilibili-cli`.
-
----
-
-## 5. Account layer (on-demand · guided · non-resident)
-
-> Design intent: the account layer is **included but not always-on**. When a
-> login wall blocks the richest evidence, deep-reach **prompts** you, and only
-> after approval **guides** a safe setup — it does **not** keep credentials
-> sitting inside the tool.
-
-### 5.1 When to prompt (not every time)
-
-During Phase 2, prompt the user to consider an account **only if both** hold:
-1. The richest evidence is clearly on a login-walled platform (Chinese consumer
-   scene → XiaoHongShu; Western indie/SaaS → X; finance → Xueqiu; full Reddit
-   comment trees), **and**
-2. After the free layer, evidence is still **thin / medium**, and this layer
-   would **materially change the verdict** (not just nice-to-have).
-
-If it's merely out of reach but doesn't change the conclusion → don't prompt;
-just record it in `not_covered`. Don't open an account for the sake of it.
-
-### 5.2 Prompt wording (plain, 5-second decision)
-
-```
-The richest real quotes on this topic are on <platform> (behind a login);
-the free layer only got us to <thin/medium> this round.
-A dedicated <platform> throwaway account would add: <what specifically>.
-Cost: maintaining the account + that platform's anti-bot risk. Open it? (yes/no)
-```
-
-No → ship the brief, record the platform in `not_covered`. Yes → go to §5.3.
-
-### 5.3 Guided setup flow (walk the user through it, do not auto-run)
-
-1. **Confirm a dedicated throwaway account** — registered for scraping, **not**
-   the user's personal/main account. If none exists, have the user create one.
-2. **Log in within an isolated environment** — a separate browser profile /
-   sandbox; **never** in the user's daily browser.
-3. **Get credentials — manual export only (the safe default)**:
-   - Log the throwaway account into an isolated browser profile, export its
-     cookie with a tool like Cookie-Editor, and paste it into
-     `agent-reach configure` for that platform.
-   - ⚠️ **Do not use `agent-reach configure --from-browser` as the safe path.**
-     It takes only a *browser name* (chrome/firefox/edge/…), **not** a profile
-     path — so it cannot be scoped to the throwaway profile, and run against your
-     daily browser it would pull your real-account cookies. Only consider it if a
-     future Agent Reach version adds explicit isolated-profile support **and**
-     you've confirmed that browser holds only the throwaway account.
-4. **Fetch for this task only** — read/search what's needed, distill into the
-   brief, note in `source_coverage` that a `<platform>` account was used.
-5. **Clear credentials after (non-resident)** — reset that platform's cookie
-   when done (`agent-reach configure` reset / remove the entry under
-   `~/.agent-reach`). Don't leave a login session living in the tool. Next time,
-   run §5.3 again.
-
-### 5.4 Account-layer hard safety lines (always)
-
-- Dedicated throwaway accounts only; never the user's main account on any platform.
-- Cookies never committed to a repo / never pasted into a shared brief.
-- Never auto-pull cookies from the daily browser.
-- Default state (no §5.3 run) = account channels off, shown unconfigured in `doctor`.
 
 ---
 
