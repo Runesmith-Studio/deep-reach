@@ -16,3 +16,7 @@ research/
 *.token*
 *.secret
 *.secret*
+
+# never track key material
+*.key
+*.pem

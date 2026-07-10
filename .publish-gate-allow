@@ -1,0 +1,17 @@
+# publish-gate allowlist for deep-reach (public skill repo with intentional
+# bilingual docs). class: rules suppress REVIEW findings only — hard leaks,
+# internal codenames and identity flags stay active.
+
+# Intentional Chinese: README.zh-CN.md + bilingual trigger phrases in SKILL.md.
+class:cjk
+
+# Defensive ToS statements (declaring login-walled platforms OUT of scope) —
+# these are the sanitized replacement for the removed §5, not violations.
+(?i)never.*from-browser
+(?i)never scrape behind
+(?i)anything behind a login wall
+(?i)login-?walled (platforms|sources|content|is recorded)
+(?i)no reading behind login walls
+(?i)login-?walled content is reported as a blind spot
+(?i)no logins, no accounts, no cookies
+登录墙后的内容只作为盲区标注
