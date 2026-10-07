@@ -21,7 +21,7 @@
 > **No more copy-pasting Reddit threads, YouTube transcripts, and forum posts into a doc by hand.**
 >
 > Just ask. **deep-reach** scans what people said in the last 30 days, reads the
-> *real* originals across 13+ platforms, and hands you a **cited brief that tells
+> *real* originals across public platforms, and hands you a **cited brief that tells
 > you how much to trust it** — in one skill, inside Claude Code.
 
 ---
@@ -39,8 +39,9 @@ and deep-reach runs the whole research loop for you:
 1. **Pulse** — finds *where* your topic is hot right now and which way the
    conversation is moving.
 2. **Dig** — reads the **full originals** (posts, comment threads, video
-   transcripts, articles) across **Reddit, X, YouTube, GitHub, Bilibili,
-   XiaoHongShu, V2EX, and the open web**.
+   transcripts, articles) across **Reddit, YouTube, GitHub, Bilibili, V2EX,
+   and the open web**. Login-walled platforms (X, XiaoHongShu, Xueqiu) are
+   flagged as blind spots, never scraped.
 3. **Brief** — writes a **cited evidence brief** with quoted sources, declared
    blind spots, and a **trust rating** (thick / medium / thin) so you never
    mistake a thin hunch for a hard finding.
@@ -56,7 +57,7 @@ and deep-reach runs the whole research loop for you:
 | Price | $500–5,000 / mo | "free" (your hours) | **free, open source** |
 | Setup | Sales call + onboarding | Glue 5 tools yourself | **one skill, drop-in** |
 | Reads full originals | partial | manual | **✅ automatic** |
-| Chinese platforms (Bilibili/Xiaohongshu/Xueqiu) | rarely | hard | **✅ built in** |
+| Chinese platforms (Bilibili/V2EX, no login) | rarely | hard | **✅ built in** |
 | Tells you how much to trust it | ❌ | ❌ | **✅ trust rating + blind spots** |
 | Real user quotes, cited | dashboards | copy-paste | **✅ quoted + linked** |
 | Lives where you work | separate app | many apps | **✅ inside Claude Code** |
@@ -73,7 +74,7 @@ guesswork about whether the answer is solid.
 - 🧭 **Market & competitor research** — surface real complaints, praise, and demand signals in customers' own words.
 - ✅ **Product / niche validation** — gather honest demand evidence *before* you build.
 - 🗣️ **Voice-of-customer mining** — the exact phrases users use, ready to reverse into copy or keywords.
-- 🌏 **13+ platforms, English & Chinese** — Reddit, X, YouTube, GitHub, Bilibili, XiaoHongShu, V2EX, web, and more.
+- 🌏 **English & Chinese public sources** — Reddit, YouTube, GitHub, Bilibili, V2EX, and the open web. Login-walled platforms (X, XiaoHongShu, Xueqiu) show up as declared blind spots.
 - 🧪 **Evidence discipline built in** — every brief declares its coverage, its blind spots, and a trust rating. No dressed-up guesses.
 - 🔒 **Private & public-source only** — zero-account, no logins; never touches any account or daily-browser cookies. Login-walled content is reported as a blind spot, not scraped.
 
@@ -131,4 +132,4 @@ deep-reach is an orchestration skill. Full credit to the open tools it can build
 
 MIT © [Runesmith Studio](https://github.com/Runesmith-Studio) — an independent AI app studio.
 
-<sub>Keywords: AI market research · social listening · competitive intelligence · competitor analysis · consumer insights · voice of customer · OSINT · Reddit / X / YouTube / Bilibili / Xiaohongshu research · Claude Code skill · agent skill</sub>
+<sub>Keywords: AI market research · social listening · competitive intelligence · competitor analysis · consumer insights · voice of customer · OSINT · Reddit / YouTube / Bilibili / V2EX research · Claude Code skill · agent skill</sub>
